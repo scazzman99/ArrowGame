@@ -22,10 +22,19 @@ public class ArrowShoot : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Vector3 shootDir = firePoint.transform.forward;
-                arrow.ShootArrow(shootDir);
-                haveArrow = false;
+                Ray camRay = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2, Screen.height/2)); //shoot a ray out from centre of screen
+                RaycastHit info;
+                if(Physics.Raycast(camRay, out info, 300f))
+                {
+                    Vector3 fireDir = info.point - firePoint.transform.position;
+                    fireDir.Normalize();
+                    arrow.ShootArrow(fireDir);
+                    haveArrow = false;
+                }
+               
             }
         }
 	}
+
+
 }
