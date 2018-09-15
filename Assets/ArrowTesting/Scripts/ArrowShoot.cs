@@ -9,11 +9,13 @@ public class ArrowShoot : MonoBehaviour {
     public GameObject firePoint; //point to fire the arrow from
     public Arrow arrow;
     
+    
 
     #endregion
     // Use this for initialization
     void Start () {
-		
+        arrow = GameObject.FindGameObjectWithTag("Arrow").GetComponent<Arrow>();
+        
 	}
 	
 	// Update is called once per frame
@@ -30,11 +32,30 @@ public class ArrowShoot : MonoBehaviour {
                     fireDir.Normalize();
                     arrow.ShootArrow(fireDir);
                     haveArrow = false;
+                    arrow.isFlying = true;
+                    arrow.transform.parent = null;
                 }
                
             }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !arrow.isFlying)
+            {
+                arrow.isReturning = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                arrow.TeleportToArrow(); //arrow script has players position stored
+            }
+        }
+        
+
+        
 	}
+
+    
 
 
 }
