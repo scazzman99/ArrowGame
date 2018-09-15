@@ -12,11 +12,17 @@ public class Arrow : MonoBehaviour {
     public bool isFlying, isReturning;
     public GameObject player; //keep tabs on where the player is so we can easily return the arrow
     public Vector3 arrowCast;
+    public Transform arrowTeleport;
     #endregion
     // Use this for initialization
     void Start () {
+        
         bow = GameObject.FindGameObjectWithTag("Bow").GetComponent<ArrowShoot>();
         player = GameObject.FindGameObjectWithTag("Player");
+        arrowTeleport = transform.GetChild(0);
+        
+        
+        
        
     }
 	
@@ -24,6 +30,8 @@ public class Arrow : MonoBehaviour {
 	void Update () {
         if (isFlying)
         {
+            
+            
             
             arrowR.transform.rotation = Quaternion.LookRotation(arrowR.velocity);
         }
@@ -39,20 +47,20 @@ public class Arrow : MonoBehaviour {
         if (other.CompareTag("EnemyWeak"))
         {
             //need to figure out how to stop the arrow on death
+            Collider arrowCol = GetComponent<Collider>();
+            Physics.IgnoreCollision(arrowCol, other, true);
+            //other.isTrigger = true;
             Destroy(other.gameObject);
+
+            
+            
         }
 
         if (other.CompareTag("Ground"))
         {
             arrowR.constraints = RigidbodyConstraints.FreezeAll;
-            RaycastHit hit;
-            Ray arrowRay = new Ray(transform.position, transform.forward);
-            if(Physics.SphereCast(arrowRay, 10f, out hit))
-            {
-                Debug.Log("RAY HIT");
-                arrowCast = hit.point;
-                
-            }
+            
+            
             isFlying = false;
         }
 
@@ -88,13 +96,26 @@ public class Arrow : MonoBehaviour {
 
     public void TeleportToArrow()
     {
-
-        
-        player.transform.position += arrowCast;
-
+        arrowR.constraints = RigidbodyConstraints.FreezeAll;
+        RaycastHit hit;
+        Ray arrowRay = new Ray(arrowTeleport.position, -arrowTeleport.up);
+        if (Physics.Raycast(arrowRay, out hit))
+        {
+            float dist = Vector3.Distance(arrowTeleport.position, hit.point);
+            if (dist < 5f)
+            {
+                Vector3 offset = new Vector3(0, 1f, 0);
+                player.transform.position = arrowTeleport.position;
+                player.transform.position += offset;
+            } else
+            {
+                player.transform.position = arrowTeleport.position;
+            }
+        }
 
         transform.position = GameObject.Find("ArrowSpawnPos").transform.position;
         transform.rotation = GameObject.Find("ArrowSpawnPos").transform.rotation;
+
         isFlying = false;
         isReturning = false;
         bow.haveArrow = true;
