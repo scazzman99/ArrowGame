@@ -37,7 +37,7 @@ public class Arrow : MonoBehaviour {
         }
         else if (isReturning) //This else if statement actually prevent the arrow from being returned unless in has been stopped
         {
-            arrowR.useGravity = false;
+            
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 100f * Time.deltaTime);
         }
 	}
@@ -59,7 +59,7 @@ public class Arrow : MonoBehaviour {
 
         if (other.CompareTag("Ground"))
         {
-            arrowR.velocity = Vector3.zero;
+            arrowR.velocity -= arrowR.velocity;
           arrowR.constraints = RigidbodyConstraints.FreezeAll;
             isFlying = false;
         }
