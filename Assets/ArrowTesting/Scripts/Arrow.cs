@@ -27,7 +27,7 @@ public class Arrow : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (isFlying)
         {
             
@@ -37,7 +37,8 @@ public class Arrow : MonoBehaviour {
         }
         else if (isReturning) //This else if statement actually prevent the arrow from being returned unless in has been stopped
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 100 * Time.deltaTime);
+            arrowR.useGravity = false;
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 100f * Time.deltaTime);
         }
 	}
 
@@ -58,22 +59,26 @@ public class Arrow : MonoBehaviour {
 
         if (other.CompareTag("Ground"))
         {
-            arrowR.constraints = RigidbodyConstraints.FreezeAll;
-            
-            
+            arrowR.velocity = Vector3.zero;
+          arrowR.constraints = RigidbodyConstraints.FreezeAll;
             isFlying = false;
         }
 
-        if (other.CompareTag("Player") || other.CompareTag("Bow"))
+        if (other.CompareTag("Player") && bow.haveArrow == false && !isFlying)
         {
-
+            bow.haveArrow = true;
+            bow.arrow = null;
+            Destroy(this.gameObject);
+            /*
             transform.position = GameObject.Find("ArrowSpawnPos").transform.position;
             transform.rotation = GameObject.Find("ArrowSpawnPos").transform.rotation;
             isFlying = false;
             isReturning = false;
             bow.haveArrow = true;
+            arrowR.constraints = RigidbodyConstraints.FreezeAll;
             transform.parent = player.transform;
-           
+            Debug.Log("Picked up arrow");
+           */
 
 
 
@@ -96,7 +101,9 @@ public class Arrow : MonoBehaviour {
 
     public void TeleportToArrow()
     {
+        arrowR.velocity = Vector3.zero;
         arrowR.constraints = RigidbodyConstraints.FreezeAll;
+        
         RaycastHit hit;
         Ray arrowRay = new Ray(arrowTeleport.position, -arrowTeleport.up);
         if (Physics.Raycast(arrowRay, out hit))
@@ -113,14 +120,13 @@ public class Arrow : MonoBehaviour {
             }
         }
 
-        transform.position = GameObject.Find("ArrowSpawnPos").transform.position;
-        transform.rotation = GameObject.Find("ArrowSpawnPos").transform.rotation;
+        //transform.position = GameObject.Find("ArrowSpawnPos").transform.position;
+        //transform.rotation = GameObject.Find("ArrowSpawnPos").transform.rotation;
 
-        isFlying = false;
-        isReturning = false;
+        
         bow.haveArrow = true;
-       
+        bow.arrow = null;
 
-        transform.parent = player.transform;
+        Destroy(this.gameObject);
     }
 }

@@ -8,13 +8,15 @@ public class ArrowShoot : MonoBehaviour {
     public bool haveArrow = true; //Do we have the arrow with us
     public GameObject firePoint; //point to fire the arrow from
     public Arrow arrow;
+    public GameObject arrowP;
+    public Transform spawnP;
     
     
 
     #endregion
     // Use this for initialization
     void Start () {
-        arrow = GameObject.FindGameObjectWithTag("Arrow").GetComponent<Arrow>();
+      
         
 	}
 	
@@ -24,25 +26,28 @@ public class ArrowShoot : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Ray camRay = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2, Screen.height/2)); //shoot a ray out from centre of screen
-                RaycastHit info;
-                if(Physics.Raycast(camRay, out info, 300f))
-                {
-                    Vector3 fireDir = info.point - firePoint.transform.position;
+                Ray camRay = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2f, Screen.height/2f)); //shoot a ray out from centre of screen
+                
+
+                Vector3 fireDir = camRay.direction;
                     fireDir.Normalize();
+                GameObject clone = Instantiate(arrowP, spawnP.position, spawnP.rotation);
+                arrow = clone.GetComponent<Arrow>();
                     arrow.ShootArrow(fireDir);
                     haveArrow = false;
                     arrow.isFlying = true;
-                    arrow.transform.parent = null;
-                }
+                   
+                
                
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && !arrow.isFlying)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                arrow.arrowR.velocity = Vector3.zero;
                 arrow.isReturning = true;
+                arrow.isFlying = false;
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse1))
