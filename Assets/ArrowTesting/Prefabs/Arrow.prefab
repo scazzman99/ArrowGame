@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caaf5109cad41ba4fae224dbe69e43f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowSpeed: 80
+  arrowSpeed: 50
   arrowR: {fileID: 54898779591571214}
   arrowStartPosition: {fileID: 0}
   bow: {fileID: 0}
