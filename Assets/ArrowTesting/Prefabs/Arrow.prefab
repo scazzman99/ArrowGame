@@ -36,7 +36,6 @@ GameObject:
   - component: {fileID: 4840621728120266}
   - component: {fileID: 33193396067812662}
   - component: {fileID: 23233628936781316}
-  - component: {fileID: 65272924876968762}
   - component: {fileID: 54898779591571214}
   - component: {fileID: 65745015367960554}
   - component: {fileID: 96957185227930322}
@@ -67,14 +66,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1916197020010910}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.026881695, y: -0.15500045, z: -0.034000397}
+  m_LocalRotation: {x: 0.7013281, y: -0, z: -0, w: 0.71283865}
+  m_LocalPosition: {x: 7.401, y: 3.584, z: 14.459}
   m_LocalScale: {x: 0.08058996, y: 0.06716018, z: 0.5294311}
   m_Children:
   - {fileID: 4684918205282888}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.067, y: 0, z: 0}
 --- !u!23 &23233628936781316
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -129,21 +128,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
+  m_Interpolate: 1
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65272924876968762
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1916197020010910}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65745015367960554
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -154,8 +141,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.647835, y: 2.5419483, z: 0.9097588}
-  m_Center: {x: -0.16700551, y: 0.13108371, z: 0.16047901}
+  m_Size: {x: 3.94, y: 3.04, z: 1.19}
+  m_Center: {x: -0.04, y: 0.13108371, z: 0}
 --- !u!96 &96957185227930322
 TrailRenderer:
   serializedVersion: 2
@@ -163,7 +150,7 @@ TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1916197020010910}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -172,7 +159,7 @@ TrailRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: a4cd15f6d259dc4478788d1ca8480de7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -200,8 +187,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.19841385
+        time: 0.0033569336
+        value: 0.035625458
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -213,7 +200,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 0.08334541, g: 1, b: 0, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

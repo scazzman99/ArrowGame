@@ -13,6 +13,7 @@ public class Arrow : MonoBehaviour {
     public GameObject player; //keep tabs on where the player is so we can easily return the arrow
     public Vector3 arrowCast;
     public Transform arrowTeleport;
+
     #endregion
     // Use this for initialization
     void Start () {
@@ -32,8 +33,10 @@ public class Arrow : MonoBehaviour {
         {
             
             
-            
-            arrowR.transform.rotation = Quaternion.LookRotation(arrowR.velocity);
+ 
+                arrowR.transform.rotation = Quaternion.LookRotation(arrowR.velocity);
+
+
         }
         else if (isReturning) //This else if statement actually prevent the arrow from being returned unless in has been stopped
         {
@@ -45,6 +48,7 @@ public class Arrow : MonoBehaviour {
     //will need to have a trigger to tell if enemy has been hit and a normal collider to stop the arrow from flying into nothing
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.CompareTag("EnemyWeak"))
         {
             //need to figure out how to stop the arrow on death
@@ -59,13 +63,17 @@ public class Arrow : MonoBehaviour {
 
         if (other.CompareTag("Ground"))
         {
-            arrowR.constraints = RigidbodyConstraints.FreezeAll;
-            arrowR.velocity = Vector3.zero;
+            isFlying = false;
+
             Collider arrowCol = GetComponent<Collider>();
             arrowCol.isTrigger = false;
-            
-            
-            isFlying = false;
+            //arrowR.constraints = RigidbodyConstraints.FreezeAll;
+            //arrowR.velocity = Vector3.zero;
+            arrowR.isKinematic = true;
+            print("HitWall");
+
+
+
         }
 
         if (other.CompareTag("Player") && bow.haveArrow == false && !isFlying)
@@ -89,6 +97,7 @@ public class Arrow : MonoBehaviour {
         }
     }
 
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -98,13 +107,14 @@ public class Arrow : MonoBehaviour {
             isFlying = false;
         }
     }
+    */
 
     public void ShootArrow(Vector3 dir)
     {
         //let the arrow move from the bow and allow it dip during an arc
-        arrowR.constraints = RigidbodyConstraints.None;
-        arrowR.constraints = RigidbodyConstraints.FreezeRotationY;
-        arrowR.constraints = RigidbodyConstraints.FreezeRotationZ;
+        //arrowR.constraints = RigidbodyConstraints.None;
+        //arrowR.constraints = RigidbodyConstraints.FreezeRotationY;
+       // arrowR.constraints = RigidbodyConstraints.FreezeRotationZ;
         arrowR.AddForce(dir * arrowSpeed, ForceMode.Impulse);
 
         

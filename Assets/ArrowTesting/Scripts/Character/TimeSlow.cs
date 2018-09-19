@@ -10,9 +10,11 @@ public class TimeSlow : MonoBehaviour {
     public bool canSlow = true;
     public bool isSlowed;
     public GUIStyle timeBar;
+    public float originalFixedDelta;
 	// Use this for initialization
 	void Start () {
         timeCurrent = timeMax;
+        originalFixedDelta = Time.fixedDeltaTime;
 	}
 
     // Update is called once per frame
@@ -32,6 +34,7 @@ public class TimeSlow : MonoBehaviour {
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 Time.timeScale = 1;
+                Time.fixedDeltaTime = originalFixedDelta;
             }
         }
     }

@@ -46,6 +46,8 @@ public class ArrowShoot : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 arrow.arrowR.velocity = Vector3.zero;
+                Collider arrowCol = arrow.GetComponent<Collider>();
+                arrowCol.isTrigger = true;
                 arrow.isReturning = true;
                 arrow.isFlying = false;
             }
