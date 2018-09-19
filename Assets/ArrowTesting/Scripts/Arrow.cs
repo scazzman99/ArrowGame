@@ -59,8 +59,12 @@ public class Arrow : MonoBehaviour {
 
         if (other.CompareTag("Ground"))
         {
-            arrowR.velocity -= arrowR.velocity;
-          arrowR.constraints = RigidbodyConstraints.FreezeAll;
+            arrowR.constraints = RigidbodyConstraints.FreezeAll;
+            arrowR.velocity = Vector3.zero;
+            Collider arrowCol = GetComponent<Collider>();
+            arrowCol.isTrigger = false;
+            
+            
             isFlying = false;
         }
 
@@ -82,6 +86,16 @@ public class Arrow : MonoBehaviour {
 
 
 
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            arrowR.velocity -= arrowR.velocity;
+            arrowR.constraints = RigidbodyConstraints.FreezeAll;
+            isFlying = false;
         }
     }
 
