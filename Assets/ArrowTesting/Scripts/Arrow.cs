@@ -44,24 +44,30 @@ public class Arrow : MonoBehaviour
             //use a Linecast to see if the arrow will hit anything in front of it. If so and it is not an enemy, stop the arrow.
             if(Physics.Linecast(transform.position, transform.position + arrowR.velocity * stepDist * Time.fixedDeltaTime, out hit))
             {
-                if (hit.collider.tag == "EnemyWeak")
-                {
-                    return;
-                }
-                else
+                if (hit.collider.tag == "Ground")
                 {
                     //get the rotation of the arrow
                     Quaternion arrowRotation = transform.rotation;
                     //get the normal of the object being hit
-                    Vector3 normalPos = hit.normal;
-                    normalPos.Normalize();
+
+                   // Vector3 normalPos = hit.normal;
+                    //normalPos.Normalize();
+
                     //freeze the arrow
                     arrowR.isKinematic = true;
                     //move arrow to slightly off the hit point
-                    arrowR.MovePosition(hit.point + normalPos * 0.2f);
+                    arrowR.MovePosition(hit.point);
                     arrowR.MoveRotation(arrowRotation);
                     isFlying = false;
                     Debug.Log("Ray HIT!");
+                }
+                //This check is here to stop the arrow from deflecting after enemy is dead (didnt work lol)
+                else if(hit.collider.tag == "ArmourWeak")
+                {
+                    arrowR.MovePosition(hit.point);
+                    Destroy(hit.transform.parent.gameObject);
+                    isFlying = false;
+                    Debug.Log("Hit WEAKSPOT");
                 }
             }
             
@@ -101,6 +107,22 @@ public class Arrow : MonoBehaviour
             bow.arrow = null;
             Destroy(this.gameObject);
 
+        }
+
+        /*
+         * if (other.CompareTag("ArmourWeak"))
+        {
+            GameObject armourParent = other.transform.parent.gameObject;
+            Debug.Log("Hit WEAK SPOT");
+            Destroy(armourParent);
+        }
+        */
+
+        if (other.CompareTag("Armour"))
+        {
+            Debug.Log("Hit ARMOUR");
+            arrowR.velocity = Vector3.zero;
+           
         }
     }
 

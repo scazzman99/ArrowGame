@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - EnemyWeak
   - Arrow
+  - Armour
+  - ArmourWeak
   layers:
   - Default
   - TransparentFX

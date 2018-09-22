@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindWithTag("Player");
+        Invoke("DestroyBullet", 4f);
 	}
 	
 	// Update is called once per frame
@@ -25,8 +26,15 @@ public class Bullet : MonoBehaviour {
         if(other.tag == "Player")
         {
             Debug.Log("TAKE DAMAGE");
-            Destroy(this);
+            Destroy(this.gameObject);
             //player.GetComponent<PlayerPrefs>().health -= 20;
         }
+    }
+
+
+
+    public void DestroyBullet()
+    {
+        Destroy(this.gameObject);
     }
 }
