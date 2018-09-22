@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour {
+public class Arrow : MonoBehaviour
+{
 
     #region ArrowVars
     public float arrowSpeed;
@@ -12,38 +13,67 @@ public class Arrow : MonoBehaviour {
     public bool isFlying, isReturning;
     public GameObject player; //keep tabs on where the player is so we can easily return the arrow
     public Vector3 arrowCast;
-    public Transform arrowTeleport;
+    public Transform arrowTeleport, collCheck;
+    public float stepDist = 10f;
 
     #endregion
     // Use this for initialization
-    void Start () {
-        
+    void Start()
+    {
+
         bow = GameObject.FindGameObjectWithTag("Bow").GetComponent<ArrowShoot>();
         player = GameObject.FindGameObjectWithTag("Player");
         arrowTeleport = transform.GetChild(0);
         
-        
-        
-       
+
+
+
+
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         if (isFlying)
         {
+            //change the look direction of the arrow to its velocity
+            arrowR.transform.rotation = Quaternion.LookRotation(arrowR.velocity);
+            Vector3 arrowForward = arrowR.velocity;
+            arrowForward.Normalize();
+            RaycastHit hit;
+            //use a Linecast to see if the arrow will hit anything in front of it. If so and it is not an enemy, stop the arrow.
+            if(Physics.Linecast(transform.position, transform.position + arrowR.velocity * stepDist * Time.fixedDeltaTime, out hit))
+            {
+                if (hit.collider.tag == "EnemyWeak")
+                {
+                    return;
+                }
+                else
+                {
+                    //get the rotation of the arrow
+                    Quaternion arrowRotation = transform.rotation;
+                    //get the normal of the object being hit
+                    Vector3 normalPos = hit.normal;
+                    normalPos.Normalize();
+                    //freeze the arrow
+                    arrowR.isKinematic = true;
+                    //move arrow to slightly off the hit point
+                    arrowR.MovePosition(hit.point + normalPos * 0.2f);
+                    arrowR.MoveRotation(arrowRotation);
+                    isFlying = false;
+                    Debug.Log("Ray HIT!");
+                }
+            }
             
-            
- 
-                arrowR.transform.rotation = Quaternion.LookRotation(arrowR.velocity);
 
 
         }
         else if (isReturning) //This else if statement actually prevent the arrow from being returned unless in has been stopped
         {
-            
+            arrowR.isKinematic = false;
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 100f * Time.deltaTime);
         }
-	}
+    }
 
     //will need to have a trigger to tell if enemy has been hit and a normal collider to stop the arrow from flying into nothing
     private void OnTriggerEnter(Collider other)
@@ -51,25 +81,14 @@ public class Arrow : MonoBehaviour {
 
         if (other.CompareTag("EnemyWeak"))
         {
-            //need to figure out how to stop the arrow on death
-            Collider arrowCol = GetComponent<Collider>();
-            Physics.IgnoreCollision(arrowCol, other, true);
-            //other.isTrigger = true;
+
             Destroy(other.gameObject);
 
-            
-            
         }
 
         if (other.CompareTag("Ground"))
         {
             isFlying = false;
-
-            Collider arrowCol = GetComponent<Collider>();
-            arrowCol.isTrigger = false;
-            //arrowR.constraints = RigidbodyConstraints.FreezeAll;
-            //arrowR.velocity = Vector3.zero;
-            arrowR.isKinematic = true;
             print("HitWall");
 
 
@@ -81,53 +100,28 @@ public class Arrow : MonoBehaviour {
             bow.haveArrow = true;
             bow.arrow = null;
             Destroy(this.gameObject);
-            /*
-            transform.position = GameObject.Find("ArrowSpawnPos").transform.position;
-            transform.rotation = GameObject.Find("ArrowSpawnPos").transform.rotation;
-            isFlying = false;
-            isReturning = false;
-            bow.haveArrow = true;
-            arrowR.constraints = RigidbodyConstraints.FreezeAll;
-            transform.parent = player.transform;
-            Debug.Log("Picked up arrow");
-           */
-
-
 
         }
     }
 
-    /*
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            arrowR.velocity -= arrowR.velocity;
-            arrowR.constraints = RigidbodyConstraints.FreezeAll;
-            isFlying = false;
-        }
-    }
-    */
+
 
     public void ShootArrow(Vector3 dir)
     {
-        //let the arrow move from the bow and allow it dip during an arc
-        //arrowR.constraints = RigidbodyConstraints.None;
-        //arrowR.constraints = RigidbodyConstraints.FreezeRotationY;
-       // arrowR.constraints = RigidbodyConstraints.FreezeRotationZ;
+        
         arrowR.AddForce(dir * arrowSpeed, ForceMode.Impulse);
+        arrowR.constraints = RigidbodyConstraints.FreezePosition;
+        arrowR.constraints = RigidbodyConstraints.FreezeRotationZ;
+        arrowR.constraints = RigidbodyConstraints.FreezeRotationY;
+        isFlying = true;
 
-        
-        
-        
-        //arrowR.velocity = dir * arrowSpeed;
     }
 
     public void TeleportToArrow()
     {
         arrowR.velocity = Vector3.zero;
         arrowR.constraints = RigidbodyConstraints.FreezeAll;
-        
+
         RaycastHit hit;
         Ray arrowRay = new Ray(arrowTeleport.position, -arrowTeleport.up);
         if (Physics.Raycast(arrowRay, out hit))
@@ -138,16 +132,15 @@ public class Arrow : MonoBehaviour {
                 Vector3 offset = new Vector3(0, 1f, 0);
                 player.transform.position = arrowTeleport.position;
                 player.transform.position += offset;
-            } else
+            }
+            else
             {
                 player.transform.position = arrowTeleport.position;
             }
         }
 
-        //transform.position = GameObject.Find("ArrowSpawnPos").transform.position;
-        //transform.rotation = GameObject.Find("ArrowSpawnPos").transform.rotation;
 
-        
+
         bow.haveArrow = true;
         bow.arrow = null;
 

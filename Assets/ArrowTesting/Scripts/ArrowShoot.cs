@@ -16,8 +16,8 @@ public class ArrowShoot : MonoBehaviour {
     #endregion
     // Use this for initialization
     void Start () {
-      
-        
+
+        Time.timeScale = 0.1f;
 	}
 	
 	// Update is called once per frame
@@ -33,9 +33,10 @@ public class ArrowShoot : MonoBehaviour {
                     fireDir.Normalize();
                 GameObject clone = Instantiate(arrowP, spawnP.position, spawnP.rotation);
                 arrow = clone.GetComponent<Arrow>();
+                arrow.transform.rotation = spawnP.rotation;
                     arrow.ShootArrow(fireDir);
                     haveArrow = false;
-                    arrow.isFlying = true;
+                    
                    
                 
                
@@ -46,8 +47,6 @@ public class ArrowShoot : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 arrow.arrowR.velocity = Vector3.zero;
-                Collider arrowCol = arrow.GetComponent<Collider>();
-                arrowCol.isTrigger = true;
                 arrow.isReturning = true;
                 arrow.isFlying = false;
             }

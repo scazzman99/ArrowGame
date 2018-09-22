@@ -12,12 +12,12 @@ public class Enemyshoot : MonoBehaviour {
     public GameObject bullet;
     public GameObject player;
     public GameObject bulletSpawnpoint;
-    public Transform bulletSpawned;
+   // public Transform bulletSpawned;
 
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindWithTag("Player");
-        bulletSpawnpoint = GameObject.Find("PistolHolder/spawnPoint");
+        bulletSpawnpoint = GameObject.Find("PistolHolder");
 		
 	}
 	
@@ -40,8 +40,8 @@ public class Enemyshoot : MonoBehaviour {
     public void Shoot()
         {
             shot = true;
-        bulletSpawned = Instantiate(bullet.transform, bulletSpawnpoint.transform.position, Quaternion.identity);
-        bulletSpawned.rotation = this.transform.rotation;
+        GameObject clone = Instantiate(bullet, bulletSpawnpoint.transform.position, bulletSpawnpoint.transform.rotation);
+       // bulletSpawned.rotation = this.transform.rotation;
         }
     public void Die()
     {

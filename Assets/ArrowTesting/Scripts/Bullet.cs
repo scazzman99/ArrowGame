@@ -24,6 +24,8 @@ public class Bullet : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
+            Debug.Log("TAKE DAMAGE");
+            Destroy(this);
             //player.GetComponent<PlayerPrefs>().health -= 20;
         }
     }
