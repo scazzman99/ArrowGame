@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour {
 
     private float damage;
     private GameObject player;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -26,8 +27,15 @@ public class Bullet : MonoBehaviour {
         if(other.tag == "Player")
         {
             Debug.Log("TAKE DAMAGE");
-            Destroy(this.gameObject);
+            //lower the players HP
+            player.GetComponent<PlayerHealth>().playerHP--;
+            DestroyBullet();
             //player.GetComponent<PlayerPrefs>().health -= 20;
+        }
+
+        if(other.tag == "Ground")
+        {
+            DestroyBullet();
         }
     }
 

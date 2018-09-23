@@ -15,6 +15,7 @@ public class Arrow : MonoBehaviour
     public Vector3 arrowCast;
     public Transform arrowTeleport, collCheck;
     public float stepDist = 10f;
+    public EnemyCounter enemyCounter;
 
     #endregion
     // Use this for initialization
@@ -24,7 +25,7 @@ public class Arrow : MonoBehaviour
         bow = GameObject.FindGameObjectWithTag("Bow").GetComponent<ArrowShoot>();
         player = GameObject.FindGameObjectWithTag("Player");
         arrowTeleport = transform.GetChild(0);
-        
+        enemyCounter = GameObject.Find("Enemies").GetComponent<EnemyCounter>();
 
 
 
@@ -66,6 +67,7 @@ public class Arrow : MonoBehaviour
                 {
                     arrowR.MovePosition(hit.point);
                     Destroy(hit.transform.parent.gameObject);
+                    enemyCounter.enemyCount--;
                     isFlying = false;
                     Debug.Log("Hit WEAKSPOT");
                 }
@@ -89,7 +91,7 @@ public class Arrow : MonoBehaviour
         {
 
             Destroy(other.gameObject);
-
+            enemyCounter.enemyCount--;
         }
 
         if (other.CompareTag("Ground"))

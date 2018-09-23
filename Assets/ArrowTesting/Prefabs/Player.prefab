@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114010598416941716}
   - component: {fileID: 143851323791624300}
   - component: {fileID: 114273930471324220}
+  - component: {fileID: 114074539906460436}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -315,6 +316,86 @@ MonoBehaviour:
   sensY: 10
   rotY: 0
   mainCam: {fileID: 20120905933947248}
+--- !u!114 &114074539906460436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418218158616018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc3876ace1d6d44f85311788d7c74fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHP: 0
+  isAlive: 1
+  health:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: c8c48fc6404a9c2418e2134f779e78c8, type: 3}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!114 &114273930471324220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -328,7 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeMax: 5
   timeCurrent: 0
-  timeModify: 0.05
+  timeModify: 0.11
   canSlow: 1
   isSlowed: 0
   timeBar:
@@ -398,6 +479,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  originalFixedDelta: 0
 --- !u!114 &114985330457150396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,7 +494,7 @@ MonoBehaviour:
   haveArrow: 1
   firePoint: {fileID: 1479301629561004}
   arrow: {fileID: 0}
-  arrowP: {fileID: 1916197020010910, guid: 09e6ba055d6dd8446896bb754db2ea66, type: 2}
+  arrowP: {fileID: 1819550164731692, guid: 09e6ba055d6dd8446896bb754db2ea66, type: 2}
   spawnP: {fileID: 4799227380555608}
 --- !u!136 &136518494520338286
 CapsuleCollider:

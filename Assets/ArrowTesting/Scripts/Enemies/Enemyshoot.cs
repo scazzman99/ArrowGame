@@ -12,6 +12,7 @@ public class Enemyshoot : MonoBehaviour {
     public GameObject bullet;
     public GameObject player;
     public GameObject bulletSpawnpoint;
+   // public GameObject gun;
    // public Transform bulletSpawned;
 
 	// Use this for initialization
@@ -24,30 +25,40 @@ public class Enemyshoot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(health <=0)
+        /*if(health <=0)
         {
             Die();
         }
-        this.transform.LookAt(player.transform);
+        */
 
-        if (currentTime == 0)
-            Shoot();
-        if (shot && currentTime < waitTime)
-            currentTime += 1 * Time.deltaTime;
-        if (currentTime >= waitTime)
-            currentTime = 0;
+        this.transform.LookAt(player.transform);
+        RaycastHit hit;
+        //if enemy has line of sight on player
+        if (Physics.Raycast(transform.position, transform.forward * 1000f, out hit))
+        {
+            if (hit.collider.tag == "Player")
+            {
+                if (currentTime == 0)
+                    Shoot();
+                if (shot && currentTime < waitTime)
+                    currentTime += 1 * Time.deltaTime;
+                if (currentTime >= waitTime)
+                    currentTime = 0;
+
+            }
+        }
     }
     public void Shoot()
         {
             shot = true;
         GameObject clone = Instantiate(bullet, bulletSpawnpoint.transform.position, bulletSpawnpoint.transform.rotation);
         
-       // bulletSpawned.rotation = this.transform.rotation;
         }
-    public void Die()
+
+   /* public void Die()
     {
         Destroy(this.gameObject);
         // player.GetComponent<PlayerPrefs>().points += pointsToGive; 
     }
-	
+	*/
 }
