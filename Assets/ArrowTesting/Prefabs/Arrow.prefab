@@ -22,7 +22,7 @@ GameObject:
   m_Layer: 0
   m_Name: CollCheck
   m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4783055443146470}
   - component: {fileID: 108309845730079224}
   m_Layer: 0
-  m_Name: Spot Light
+  m_Name: ArrowLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,16 +300,16 @@ Light:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1849886372893786}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 0.9386792, b: 0.9386792, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.18269229, a: 1}
   m_Intensity: 5
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -353,3 +353,5 @@ MonoBehaviour:
   arrowTeleport: {fileID: 0}
   collCheck: {fileID: 4569470354233984}
   stepDist: 5
+  enemyCounter: {fileID: 0}
+  effectLight: {fileID: 108309845730079224}

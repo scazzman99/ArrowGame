@@ -12,6 +12,7 @@ public class Enemyshoot : MonoBehaviour {
     public GameObject bullet;
     public GameObject player;
     public GameObject bulletSpawnpoint;
+    
    // public GameObject gun;
    // public Transform bulletSpawned;
 
@@ -19,6 +20,7 @@ public class Enemyshoot : MonoBehaviour {
 	void Start () {
         player = GameObject.FindWithTag("Player");
         //bulletSpawnpoint = GameObject.Find("PistolHolder");
+        
 		
 	}
 	
@@ -31,7 +33,10 @@ public class Enemyshoot : MonoBehaviour {
         }
         */
 
-        this.transform.LookAt(player.transform);
+        this.transform.LookAt(player.transform.position);
+        
+
+        
         RaycastHit hit;
         //if enemy has line of sight on player
         if (Physics.Raycast(transform.position, transform.forward * 1000f, out hit))

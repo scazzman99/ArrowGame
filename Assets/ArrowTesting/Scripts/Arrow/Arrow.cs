@@ -16,6 +16,7 @@ public class Arrow : MonoBehaviour
     public Transform arrowTeleport, collCheck;
     public float stepDist = 10f;
     public EnemyCounter enemyCounter;
+    public Light effectLight;
 
     #endregion
     // Use this for initialization
@@ -26,7 +27,8 @@ public class Arrow : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         arrowTeleport = transform.GetChild(0);
         enemyCounter = GameObject.Find("Enemies").GetComponent<EnemyCounter>();
-
+        
+        effectLight.enabled = false;
 
 
 
@@ -89,9 +91,10 @@ public class Arrow : MonoBehaviour
 
         if (other.CompareTag("EnemyWeak"))
         {
-
+            effectLight.enabled = true;
             Destroy(other.gameObject);
             enemyCounter.enemyCount--;
+            Invoke("DisableLight", 0.05f);
         }
 
         if (other.CompareTag("Ground"))
@@ -169,5 +172,10 @@ public class Arrow : MonoBehaviour
         bow.arrow = null;
 
         Destroy(this.gameObject);
+    }
+
+    private void DisableLight()
+    {
+        effectLight.enabled = false;
     }
 }

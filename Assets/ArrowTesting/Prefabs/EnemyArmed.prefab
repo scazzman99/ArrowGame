@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 136694797280605740}
   - component: {fileID: 114220247537989210}
   - component: {fileID: 195415459092639038}
+  - component: {fileID: 114495804074223120}
   m_Layer: 0
   m_Name: EnemyArmed
   m_TagString: EnemyWeak
@@ -242,11 +243,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointsToGive: 0
-  waitTime: 1
+  waitTime: 0.5
   health: 100
   bullet: {fileID: 1082530249886514, guid: 51f0ecc7514eaa7448c46b0afb90e94b, type: 2}
   player: {fileID: 0}
   bulletSpawnpoint: {fileID: 1205827197641350}
+--- !u!114 &114495804074223120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1920530434416712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62aa47ae8e8130f4a8d86d5dcb3764c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136694797280605740
 CapsuleCollider:
   m_ObjectHideFlags: 1
