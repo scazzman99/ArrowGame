@@ -44,7 +44,7 @@ public class EnemyCounter : MonoBehaviour {
     public void LevelChange()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        if (currentSceneIndex == 2)
+        if (currentSceneIndex == 3)
         {
             SceneManager.LoadScene(0);
         }

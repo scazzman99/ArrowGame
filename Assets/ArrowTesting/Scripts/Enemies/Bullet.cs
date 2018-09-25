@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindWithTag("Player");
-        Invoke("DestroyBullet", 4f);
+        Invoke("DestroyBullet", 8f);
 	}
 	
 	// Update is called once per frame
@@ -33,16 +33,18 @@ public class Bullet : MonoBehaviour {
             //player.GetComponent<PlayerPrefs>().health -= 20;
         }
 
-        if(other.tag == "Ground")
+        if(other.CompareTag("Ground"))
         {
             DestroyBullet();
         }
     }
 
+    
+
 
 
     public void DestroyBullet()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

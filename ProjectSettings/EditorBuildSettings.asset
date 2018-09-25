@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/ArrowTesting/Scenes/Menu.unity
     guid: c27d2935c0d16344eb430a29c86f3325
   - enabled: 1
+    path: Assets/ArrowTesting/Scenes/TutorialScreen.unity
+    guid: 44a96b68c4a8a324ca1422e816813b32
+  - enabled: 1
     path: Assets/ArrowTesting/Scenes/ArrowTest.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1

@@ -294,6 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479c613dcd2e9a54f967f1da9ffc2c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseManager: {fileID: 0}
 --- !u!114 &114010598416941716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,10 +313,11 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   clampMin: -60
   clampMax: 60
-  sensX: 10
-  sensY: 10
+  sensX: 5
+  sensY: 5
   rotY: 0
   mainCam: {fileID: 20120905933947248}
+  pauseManager: {fileID: 0}
 --- !u!114 &114074539906460436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,7 +334,7 @@ MonoBehaviour:
   health:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: c8c48fc6404a9c2418e2134f779e78c8, type: 3}
+      m_Background: {fileID: 2800000, guid: 8fed809933c0b7c4ebfcb176cb45ba71, type: 3}
       m_ScaledBackgrounds: []
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
@@ -396,6 +398,8 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  pauseManager: {fileID: 0}
+  playerControl: {fileID: 0}
 --- !u!114 &114273930471324220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -480,6 +484,7 @@ MonoBehaviour:
     m_StretchWidth: 1
     m_StretchHeight: 0
   originalFixedDelta: 0
+  pauseManager: {fileID: 0}
 --- !u!114 &114985330457150396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -496,6 +501,8 @@ MonoBehaviour:
   arrow: {fileID: 0}
   arrowP: {fileID: 1819550164731692, guid: 09e6ba055d6dd8446896bb754db2ea66, type: 2}
   spawnP: {fileID: 4799227380555608}
+  pauseManager: {fileID: 0}
+  playerHP: {fileID: 0}
 --- !u!136 &136518494520338286
 CapsuleCollider:
   m_ObjectHideFlags: 1
