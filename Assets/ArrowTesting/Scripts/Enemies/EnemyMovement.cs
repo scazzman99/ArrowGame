@@ -29,7 +29,7 @@ public class EnemyMovement : MonoBehaviour
         
         float distance = Vector3.Distance(transform.position, player.position);
         RaycastHit hit;
-        if (distance > 15f)
+        if (distance > 10f)
         {
             nav.SetDestination(player.position);
         } else
