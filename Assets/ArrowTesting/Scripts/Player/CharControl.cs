@@ -11,17 +11,22 @@ public class CharControl : MonoBehaviour {
     public Vector3 direction = Vector3.zero;
     public float clampMin, clampMax, sensX, sensY, rotY;
     public Camera mainCam;
+    public PauseManager pauseManager;
     
 	// Use this for initialization
 	void Start () {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        pauseManager = GameObject.FindGameObjectWithTag("PauseManager").GetComponent<PauseManager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Movement();
-        CamMove();
+        if (player.enabled)
+        {
+            Movement();
+            CamMove();
+        }
 	}
 
     private void Movement()
@@ -39,9 +44,12 @@ public class CharControl : MonoBehaviour {
 
     private void CamMove()
     {
-        rotY += Input.GetAxis("Mouse Y") * sensY;
-        rotY = Mathf.Clamp(rotY, clampMin, clampMax);
-        mainCam.transform.localEulerAngles = new Vector3(-rotY, 0f, 0f);
-        player.transform.Rotate(0f, Input.GetAxis("Mouse X") * sensX, 0f);
+        if (!pauseManager.isPaused)
+        {
+            rotY += Input.GetAxis("Mouse Y") * sensY;
+            rotY = Mathf.Clamp(rotY, clampMin, clampMax);
+            mainCam.transform.localEulerAngles = new Vector3(-rotY, 0f, 0f);
+            player.transform.Rotate(0f, Input.GetAxis("Mouse X") * sensX, 0f);
+        }
     }
 }

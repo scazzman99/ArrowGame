@@ -11,11 +11,13 @@ public class TimeSlow : MonoBehaviour {
     public bool isSlowed;
     public GUIStyle timeBar;
     public float originalFixedDelta;
+    public PauseManager pauseManager;
 	// Use this for initialization
 	void Start () {
         timeCurrent = timeMax;
         originalFixedDelta = Time.fixedDeltaTime;
-	}
+        pauseManager = GameObject.FindGameObjectWithTag("PauseManager").GetComponent<PauseManager>();
+    }
 
     // Update is called once per frame
     private void Update()
@@ -58,12 +60,15 @@ public class TimeSlow : MonoBehaviour {
 
     private void OnGUI()
     {
-        float scrW = Screen.width / 16;
-        float scrH = Screen.height / 9;
+        if (!pauseManager.isPaused)
+        {
+            float scrW = Screen.width / 16;
+            float scrH = Screen.height / 9;
 
-        //Set up bar for time
-        //background bar
-        GUI.Box(new Rect(scrW * 6f, scrH * 0.25f, scrW * 4, scrH * 0.75f), "");
-        GUI.Box(new Rect(scrW * 6f, scrH * 0.25f, (scrW * 4 * timeCurrent) / timeMax, scrH * 0.75f), "", timeBar);
+            //Set up bar for time
+            //background bar
+            GUI.Box(new Rect(scrW * 6f, scrH * 0.25f, scrW * 4, scrH * 0.75f), "");
+            GUI.Box(new Rect(scrW * 6f, scrH * 0.25f, (scrW * 4 * timeCurrent) / timeMax, scrH * 0.75f), "", timeBar);
+        }
     }
 }
