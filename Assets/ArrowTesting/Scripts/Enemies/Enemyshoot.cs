@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemyshoot : MonoBehaviour {
-    public float pointsToGive;
+   
     public float waitTime;
     private float currentTime;
     private bool shot;
 
-    public float health;
+    
     public GameObject bullet;
     public GameObject player;
     public GameObject bulletSpawnpoint;
@@ -57,6 +57,8 @@ public class Enemyshoot : MonoBehaviour {
         {
             shot = true;
         GameObject clone = Instantiate(bullet, bulletSpawnpoint.transform.position, bulletSpawnpoint.transform.rotation);
+        Rigidbody bulletR = clone.GetComponent<Rigidbody>();
+        bulletR.AddForce(clone.transform.forward * 10f, ForceMode.Impulse);
         
         }
 

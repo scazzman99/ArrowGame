@@ -27,9 +27,11 @@ public class EnemyMovement : MonoBehaviour
         //{
         // ... set the destination of the nav mesh agent to the player.
         
+       
+
         float distance = Vector3.Distance(transform.position, player.position);
         RaycastHit hit;
-        if (distance > 10f)
+        if (distance < 10f)
         {
             nav.SetDestination(player.position);
         } else

@@ -8,23 +8,29 @@ public class Bullet : MonoBehaviour {
 
     private float damage;
     private GameObject player;
+    public Rigidbody bulletR;
     
 
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindWithTag("Player");
         Invoke("DestroyBullet", 8f);
+        bulletR = GetComponent<Rigidbody>();
+        bulletR.useGravity = false;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        maxDistance += 1 * Time.deltaTime;
+        // transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        // maxDistance += 1 * Time.deltaTime;
+        
 		
 	}
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        
+        if (other.tag == "Player")
         {
             Debug.Log("TAKE DAMAGE");
             //lower the players HP
@@ -33,8 +39,10 @@ public class Bullet : MonoBehaviour {
             //player.GetComponent<PlayerPrefs>().health -= 20;
         }
 
-        if(other.CompareTag("Ground"))
+
+        if(other.tag == "Ground")
         {
+            Debug.Log("BULLET HIT GROUND");
             DestroyBullet();
         }
     }
@@ -45,6 +53,6 @@ public class Bullet : MonoBehaviour {
 
     public void DestroyBullet()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }
